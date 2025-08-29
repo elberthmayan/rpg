@@ -149,7 +149,7 @@ Verifique se a pasta `data/` foi copiada junto do `.exe`.
 
 ---
 
-## 📌 Roadmap (ideias)
+## 📌 Roadmap (Ideias Futuras)
 
 * Dificuldades configuráveis.
 * Eventos climáticos dinâmicos por região.
