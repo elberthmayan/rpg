@@ -1,45 +1,83 @@
-<div align="center">
+# Em Busca da Verdade
 
-Em Busca da Verdade
-</div>
+> **RPG de sobrevivência em Python**. Você acorda em um mundo devastado e precisa lidar com **fome**, **sede**, **inimigos** e **mudanças climáticas**. A jornada começa em **06/12/1994**, aos **18 anos**. **Sobreviva até os 30** para recuperar suas memórias — e descobrir a verdade.
 
-Um RPG de sobrevivência em Python onde você acorda em um mundo devastado e precisa lutar contra fome, sede, inimigos e mudanças climáticas. A jornada começa em 06/12/1994, aos 18 anos. Se conseguir viver até os 30, lembranças de sua família voltarão e a verdade será revelada.
+---
 
-Principais Recursos
-Narrativa e Tela Inicial: Introdução à história e menu com escolhas iniciais.
+## 🎮 Destaques do Jogo
 
-Inventário Completo: Gerenciamento de itens, consumo de recursos e sistema de crafting.
+* **Narrativa + Tela Inicial**: introdução à história e menu com escolhas iniciais.
+* **Inventário Completo**: gerencie itens, consuma recursos e use o sistema de *crafting*.
+* **Combate e Sobrevivência**: enfrente inimigos, resista ao clima e ao passar do tempo.
+* **API de Save/Load Local**: progresso salvo em `data/savegame.json` usando JSON.
 
-Sistema de Combate e Sobrevivência: Enfrente inimigos, resista ao clima e ao passar do tempo.
+---
 
-Destaque Técnico: API de Save/Load Local
-Para melhorar a experiência do jogador, foi implementada uma API local que salva e carrega o progresso do jogo usando um arquivo JSON.
+## 🧠 Como funciona o Save/Load
 
-Como Funciona: A API gerencia o estado atual do jogo — incluindo as estatísticas do jogador, inventário e progresso na história — salvando tudo em um arquivo savegame.json.
+* **Gerenciamento de estado**: estatísticas do jogador, inventário e progresso da história.
+* **Persistência automática**: ao iniciar, o jogo detecta *save* existente e oferece continuar.
+* **Tecnologia**: JSON + bibliotecas padrão do Python (sem dependências complexas).
 
-Persistência: Ao iniciar o jogo, o sistema utiliza a API para verificar a existência de um save anterior. Caso exista, o jogador tem a opção de "Continuar", carregando todos os dados salvos e retomando a aventura exatamente de onde parou.
+---
 
-Implementação: A API foi desenvolvida utilizando as bibliotecas padrão do Python para manipulação de arquivos e o formato JSON, garantindo uma solução robusta e de fácil manutenção.
+## 🛠️ Tecnologias
 
-Tecnologias Utilizadas
-Python 3.x
+* Python 3.x
+* [colorama](https://pypi.org/project/colorama/) (cores no terminal)
 
-colorama (para cores no terminal)
+---
 
-Como Executar o Jogo
-A maneira mais fácil de jogar é usando o arquivo executável pré-compilado.
+## ▶️ Como executar
 
-Abra a pasta dist/.
+### Opção 1 — Executável (Windows)
 
-Execute o arquivo main.exe.
+1. Baixe/clique em `dist/main.exe`.
+2. Execute e siga as instruções no console.
 
-Siga as instruções apresentadas no console para jogar.
+> Observação: o *save* será criado/atualizado em `data/savegame.json`.
 
-<br>
+### Opção 2 — Rodar pelo código-fonte
 
-<details>
-<summary>Clique para ver a Estrutura do Projeto</summary>
+1. Instale o Python 3.x.
+2. (Opcional) Crie e ative um *virtualenv*.
+3. Instale dependências:
 
+   ```bash
+   pip install -r requirements.txt
+   ```
+4. Rode o jogo:
+
+   ```bash
+   python main.py
+   ```
+
+---
+
+## 📦 Gerar o executável (PyInstaller)
+
+> Gere um `.exe` autônomo incluindo a pasta `data/` (Windows).
+
+```bash
+pip install -r requirements.txt
+pip install pyinstaller
+
+# Na raiz do projeto
+pyinstaller \
+  --onefile \
+  --name main \
+  --add-data "data;data" \
+  main.py
+```
+
+* O executável final ficará em `dist/main.exe`.
+* Se usar Linux/macOS, troque `--add-data "data;data"` por `--add-data "data:data"`.
+
+---
+
+## 🗂️ Estrutura do Projeto
+
+```
 em-busca-da-verdade/
 ├── data/
 │   ├── consumables.json
@@ -58,20 +96,74 @@ em-busca-da-verdade/
 ├── utils.py
 ├── path_handler.py
 └── requirements.txt
+```
 
-</details>
+**Arquivos principais**
 
-<details>
-<summary>Clique para ver a Equipe de Desenvolvimento</summary>
+* `main.py`: ponto de entrada do jogo.
+* `player.py`: status do jogador (fome, sede, idade, etc.).
+* `menus.py`: navegação e escolhas do usuário.
+* `narrativa.py`: textos e eventos da história.
+* `savegame.py`: leitura/escrita do `savegame.json`.
+* `utils.py`: funções auxiliares (ex.: validação e formatação).
+* `path_handler.py`: resolve caminhos (execução via `.py` ou `.exe`).
 
-Elberth Mayan
+---
 
-Daiane Botelho
+## 🕹️ Controles & Loop de jogo
 
-Lais
+* **Menu inicial** → iniciar novo jogo / continuar / sair.
+* **Ações** → explorar, lutar, coletar, cozinhar, craftar, gerenciar inventário.
+* **Passagem do tempo** → envelhecimento, clima e eventos impactam status.
 
-Isaque Felix
+> Dica: administre **comida** e **água** antes de enfrentar combates longos.
 
-Yasmin
+---
 
-</details>
+## 🧪 Dados de jogo (JSON)
+
+* `items.json`: itens gerais (materiais, ferramentas, etc.).
+* `consumables.json`: consumíveis (efeitos de fome/sede/saúde).
+* `enemies.json`: atributos e comportamento básico dos inimigos.
+* `recipes_craft.json`: receitas de *crafting* (entrada → saída).
+* `recipes_cooking.json`: receitas de cozimento (cru → preparado).
+
+---
+
+## ❓ Perguntas frequentes (FAQ)
+
+**Onde fica o arquivo de *save*?**
+Em `data/savegame.json` (criado automaticamente na primeira execução).
+
+**Posso resetar o progresso?**
+Sim. Exclua `data/savegame.json` ou use a opção “Novo Jogo”.
+
+**O executável fecha imediatamente. E agora?**
+Execute pelo Terminal para ver o erro:
+
+```bash
+./dist/main.exe
+```
+
+Verifique se a pasta `data/` foi copiada junto do `.exe`.
+
+---
+
+## 📌 Roadmap (ideias)
+
+* Dificuldades configuráveis.
+* Eventos climáticos dinâmicos por região.
+* *Logs* de combate detalhados.
+* *Achievements* e *endings* alternativos.
+
+---
+
+## 👥 Equipe
+
+* Elberth Mayan
+* Daiane Botelho
+* Lais
+* Isaque Felix
+* Yasmin
+
+
