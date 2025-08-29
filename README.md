@@ -120,7 +120,7 @@ em-busca-da-verdade/
 
 ---
 
-## 🧪 Dados de jogo (JSON)
+##  Dados de jogo (JSON)
 
 * `items.json`: itens gerais (materiais, ferramentas, etc.).
 * `consumables.json`: consumíveis (efeitos de fome/sede/saúde).
