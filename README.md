@@ -24,7 +24,7 @@
 ## 🛠️ Tecnologias
 
 * Python 3.x
-* [colorama](https://pypi.org/project/colorama/) (cores no terminal)
+* [colorama](https://pypi.org/project/colorama/)
 
 ---
 
